@@ -1,0 +1,22 @@
+{
+  "Spawners": [
+    {
+      "SpawnerId": "Echo_Damage_Ground_Constant",
+      "PositionOffset": {
+        "Z": 0
+      },
+      "FixedRotation": false,
+      "StartDelay": 0
+    },
+    {
+      "SpawnerId": "Echo_Damage_Lines_Constant",
+      "PositionOffset": {
+        "Z": 0
+      },
+      "FixedRotation": false,
+      "StartDelay": 0
+    }
+  ],
+  "LifeSpan": 0.25,
+  "CullDistance": 100
+}
