@@ -1,0 +1,35 @@
+{
+    "Group": "CROW",
+    "Name": "LittleEchoes",
+    "Version": "1.0.43899",
+    "Description": "Use the essences of Orbis to summon aetherial helpers! Submitted for HytaleModding.dev's 'Echoes of the Machine' modjam.",
+    "Authors": [
+        {
+            "Name": "Numilani (Code, Asset Pack)",
+            "Url": "https://blog.numilani.me/about-me"
+        },
+        {
+            "Name": "DAT aka 'Onion' (Models, Textures)",
+            "Url": "https://squeeingonion.wixsite.com/soul"
+        },
+        {
+            "Name": "Keksin (Textures)"
+        },
+        {
+            "Name": "Segellion (Ideas/Misc Tasks)"
+        }
+    ],
+    "Website": "https://github.com/numilani/LittleEchoes",
+    "ServerVersion": "*",
+    "Dependencies": {
+        "Hytale:EntityModule": "*",
+        "Hytale:AssetModule": "*",
+        "Hytale:NPC": "*"
+    },
+    "OptionalDependencies": {
+        
+    },
+    "DisabledByDefault": false,
+    "Main": "me.numilani.littleechoes.Main",
+    "IncludesAssetPack": true
+}

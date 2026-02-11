@@ -1,0 +1,70 @@
+{
+  "TranslationProperties": {
+    "Name": "littleechoes.items.NavNode_Red.name",
+    "Description": "littleechoes.items.NavNode_Red.description"
+  },
+  "Icon": "Icons/ItemsGenerated/NavNode_Red.png",
+  "Parent": "Rubble_Stone",
+  "InteractionVars": {
+    "Item_Throw_Projectile": {
+      "Interactions": [
+        {
+          "Parent": "Item_Throw_Projectile",
+          "ProjectileId": "Rubble_Slate"
+        }
+      ]
+    }
+  },
+  "BlockType": {
+    "CustomModel": "Blocks/Runes/NavNode.blockymodel",
+    "Gathering": {
+      "Soft": {
+        "ItemId": "NavNode_Orange"
+      },
+      "Harvest": {
+        "ItemId": "NavNode_Orange"
+      }
+    },
+    "ParticleColor": "#515155",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Runes/Runestone_RED.png"
+      }
+    ],
+    "CustomModelScale": 0.7
+  },
+  "DropOnDeath": true,
+  "Model": "Blocks/Runes/NavNode.blockymodel",
+  "Texture": "Blocks/Runes/Runestone_RED.png",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "Recipe": {
+    "Input": [
+      {
+        "ResourceTypeId": "Rock"
+      },
+      {
+        "ResourceTypeId": "",
+        "ItemId": "Plant_Petals_Red"
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Id": "EchoMachine",
+        "Categories": [
+          "EchoMachine_Nodes"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "Model": "NPC/Echo_Base/echo_base.blockymodel",
+  "Texture": "NPC/Echo_Base/orange.png",
+  "HitBox": {
+    "Max": {
+      "X": 0.3,
+      "Y": 1.2,
+      "Z": 0.2
+    },
+    "Min": {
+      "X": -0.3,
+      "Y": 0,
+      "Z": -0.35
+    }
+  },
+  "Light": {
+    "Radius": 0
+  }
+}

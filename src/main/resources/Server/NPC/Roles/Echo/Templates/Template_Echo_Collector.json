@@ -1,0 +1,341 @@
+{
+  "$Comment": "DisplayState",
+  "StartState": "CheckingSurroundings",
+  "Type": "Abstract",
+  "Appearance": "Echo_Lumberjack",
+  "MotionControllerList": [
+    {
+      "Type": "Walk",
+      "MaxWalkSpeed": 3,
+      "Gravity": 10,
+      "MaxFallSpeed": 8,
+      "Acceleration": 10
+    }
+  ],
+  "MaxHealth": {
+    "Compute": "MaxHealth"
+  },
+  "Invulnerable": true,
+  "Parameters": {
+    "Appearance": {
+      "Value": "Kweebec_Seedling",
+      "Description": "Model to be used"
+    },
+    "ViewRange": {
+      "Value": 30,
+      "Description": "View range"
+    },
+    "ViewSector": {
+      "Value": 180,
+      "Description": "View sector"
+    },
+    "HearingRange": {
+      "Value": 20,
+      "Description": "Hearing range"
+    },
+    "AlertedRange": {
+      "Value": 30,
+      "Description": "A range within which the player can be seen/sensed when the NPC is alerted to their presence"
+    },
+    "DropList": {
+      "Value": "Drop_Kweebec_Seedling",
+      "Description": "Drop Items"
+    },
+    "MaxSpeed": {
+      "Value": 3,
+      "Description": "Maximum walking speed"
+    },
+    "IdleMotionComponent": {
+      "Value": "Component_Instruction_Intelligent_Idle_Motion_Wander",
+      "Description": "The component that controls how the NPC moves during idle state"
+    },
+    "AttitudeGroup": {
+      "Value": "Kweebec",
+      "Description": "This NPCs attitude group"
+    },
+    "Weapons": {
+      "Value": [],
+      "TypeHint": "String",
+      "Description": "NPC Weapons"
+    },
+    "HideWhenScared": {
+      "Value": false,
+      "Description": "Whether this NPC will hide rather than fleeing when afraid"
+    },
+    "MaxHealth": {
+      "Value": 100,
+      "Description": "Max health for the NPC"
+    },
+    "IsMemory": {
+      "Value": false,
+      "Description": "Defines if the NPC is a memory"
+    },
+    "MemoriesCategory": {
+      "Value": "Other",
+      "Description": "Defines the category of the memory"
+    },
+    "MemoriesNameOverride": {
+      "Value": "",
+      "Description": "Overrides the memory name if set"
+    },
+    "NameTranslationKey": {
+      "Value": "server.npcRoles.Template.name",
+      "Description": "Translation key for NPC name display"
+    }
+  },
+  "Instructions": [
+    {
+      "Sensor": {
+        "Type": "State",
+        "State": "CheckingSurroundings"
+      },
+      "Instructions": [
+        {
+          "Continue": true,
+          "BodyMotion": {
+            "Type": "Nothing"
+          },
+          "Actions": [
+            {
+              "Type": "ResetBlockSensors"
+            }
+          ]
+        },
+        {
+          "Sensor": {
+            "Type": "Self",
+            "Filters": [
+              {
+                "Type": "Stat",
+                "StatTarget": "Value",
+                "RelativeTo": "Health",
+                "Stat": "Health",
+                "RelativeToTarget": "Max",
+                "ValueRange": [
+                  0,
+                  0.25
+                ]
+              }
+            ]
+          },
+          "Actions": [
+            {
+              "Type": "State",
+              "State": "DepositAndDie"
+            }
+          ]
+        },
+        {
+          "Sensor": {
+            "Type": "DroppedItem",
+            "Range": 32.0
+          },
+          "Actions": [
+            {
+              "Type": "StorePosition",
+              "Slot": "TargetItem"
+            },
+            {
+              "Type": "State",
+              "State": "ItemCollection"
+            }
+          ]
+        },
+        {
+          "Continue": true,
+          "Sensor": {
+            "Type": "Block",
+            "Range": 127.0,
+            "Blocks": "YellowNavNode",
+            "Random": true
+          },
+          "Actions": [
+            {
+              "Type": "StorePosition",
+              "Slot": "PotentialNextNode"
+            }
+          ]
+        },
+        {
+          "Sensor": {
+            "Type": "ReadPosition",
+            "Slot": "PotentialNextNode",
+            "Range": 127.0,
+            "MinRange": 2.5
+          },
+          "Actions": [
+            {
+              "Type": "StorePosition",
+              "Slot": "NextNode"
+            },
+            {
+              "Type": "State",
+              "State": "MovingToNode"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Sensor": {
+        "Type": "State",
+        "State": "MovingToNode"
+      },
+      "Instructions": [
+        {
+          "Sensor": {
+            "Type": "ReadPosition",
+            "Slot": "NextNode",
+            "Range": 127.0,
+            "MinRange": 1.5
+          },
+          "BodyMotion": {
+            "Type": "Seek",
+            "SlowDownDistance": 3.0,
+            "StopDistance": 0.2
+          }
+        },
+        {
+          "Sensor": {
+            "Type": "Not",
+            "Sensor": {
+              "Type": "ReadPosition",
+              "Slot": "NextNode",
+              "Range": 32.0,
+              "MinRange": 1.5
+            }
+          },
+          "Actions": [
+            {
+              "Type": "ResetBlockSensors"
+            },
+            {
+              "Type": "State",
+              "State": "CheckingSurroundings"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Sensor": {
+        "Type": "State",
+        "State": "DepositAndDie"
+      },
+      "Instructions": [
+        {
+          "Continue": true,
+          "Sensor": {
+            "Type": "Block",
+            "Range": 127.0,
+            "Blocks": "YellowDepositNode"
+          },
+          "Actions": [
+            {
+              "Type": "StorePosition",
+              "Slot": "NearestChestNode"
+            }
+          ]
+        },
+        {
+          "Continue": true,
+          "Sensor": {
+            "Type": "ReadPosition",
+            "Slot": "NearestChestNode",
+            "Range": 127.0
+          },
+          "BodyMotion": {
+            "Type": "Seek",
+            "SlowDownDistance": 3.0,
+            "StopDistance": 0.2
+          }
+        },
+        {
+          "Sensor": {
+            "Type": "Not",
+            "Sensor": {
+              "Type": "ReadPosition",
+              "Slot": "NearestChestNode",
+              "Range": 127.0,
+              "MinRange": 1.5
+            }
+          },
+          "Actions": [
+            {
+              "Type": "DropInventory"
+            },
+            {
+              "Type": "SetStat",
+              "Stat": "Health",
+              "Value": -10.0,
+              "Add": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Sensor": {
+        "Type": "State",
+        "State": "ItemCollection"
+      },
+      "Instructions": [
+        {
+          "Sensor": {
+            "Type": "ReadPosition",
+            "Slot": "TargetItem",
+            "Range": 32.0
+          },
+          "BodyMotion": {
+            "Type": "Seek",
+            "SlowDownDistance": 3.0,
+            "StopDistance": 1.5
+          }
+        },
+        {
+          "Sensor": {
+            "Type": "ReadPosition",
+            "Slot": "TargetTree",
+            "Range": 3.0
+          },
+          "Actions": [
+            {
+              "Type": "BreakBlock",
+              "Range": 5.0
+            },
+            {
+              "Type": "SetStat",
+              "Stat": "Health",
+              "Value": -1.0,
+              "Add": true
+            },
+            {
+              "Type": "PickUpItem",
+              "Delay": [
+                1.0,
+                3.0
+              ],
+              "Range": 16.0,
+              "Hoover": true,
+              "StorageTarget": "Inventory"
+            }
+          ]
+        },
+        {
+          "Sensor": {
+            "Type": "Any"
+          },
+          "Actions": [
+            {
+              "Type": "State",
+              "State": "CheckingSurroundings"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "NameTranslationKey": {
+    "Compute": "NameTranslationKey"
+  }
+}

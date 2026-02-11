@@ -1,0 +1,20 @@
+items.ChestNode_Yellow.name = Lumberjack Deposit Node
+items.ChestNode_Yellow.description = Lumberjack Echoes will return here to drop their items. Place a hopper beneath to catch them!
+
+items.NavNode_Yellow.name = Wanderer Nav Node
+items.NavNode_Yellow.description = Wanderer Echoes will navigate to this node if they are close enough. Place multiple to form a wander path!
+
+items.NavNode_Red.name = Fighter Nav Node
+items.NavNode_Red.description = Fighter Echoes will navigate to this node if they are close enough. Place multiple to form a wander path!
+
+Bench_EchoMachine.name = Echo Machine
+Bench_EchoMachine.description = A mysterious aetherial workbench, clearly ancient. It's holding together pretty well, given the circumstances.
+
+benchcategories.echomachine.nodes = Echo Nodes
+benchcategories.echomachine.combat = Combat Echoes
+benchcategories.echomachine.worker = Worker Echoes
+
+items.Egg_Spawner_Echo_Lumberjack.name = Wanderer Echo
+items.Egg_Spawner_Echo_Lumberjack.description = An echo with no goal. Just wanders...
+items.Egg_Spawner_Echo_Fighter.name = Fighter Echo
+items.Egg_Spawner_Echo_Fighter.description = An echo ready to protect you with its last breath! Oh...right, it doesn't breathe...
